@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: "Home Page - Diego" });
+useSeoMeta({ title: "Lou Marche - Développeur Full-Stack" });
 definePageMeta({ layout: false });
 import {animatedHeadline} from '@/utils/animatedHeadline';
 import {buttonAnimation} from '@/utils/buttonAnimation';

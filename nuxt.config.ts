@@ -3,9 +3,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
-      title: "Diego - Personal Creative Portfolio & Resume vue nuxt 3 Template",
+      title: "Lou Marche - Développeur Full-Stack",
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/images/favicon.svg' }
+      ],
       script: [
         {
           src: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js",
