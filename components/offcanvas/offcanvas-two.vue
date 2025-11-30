@@ -29,37 +29,8 @@
             </div>
             <div class="tp-main-menu-mobile d-lg-none">
                <nav>
-                  <offcanvas-menus />
+                  <offcanvas-menus @close-menu="closeOffcanvas" />
                </nav>
-            </div>
-            <div class="tp-offcanvas-gallery">
-               <div class="row gx-2">
-                  <!-- Colonne gauche : InnovShop + DupontCare -->
-                  <div class="col-6">
-                     <div class="mb-2">
-                        <div class="tp-offcanvas-gallery-img fix">
-                           <nuxt-link :to="`/portfolio-details/${portfolio_data[0].id}`">
-                              <img :src="portfolio_data[0].img" :alt="portfolio_data[0].title" class="gallery-img-small">
-                           </nuxt-link>
-                        </div>
-                     </div>
-                     <div class="mb-2">
-                        <div class="tp-offcanvas-gallery-img fix">
-                           <nuxt-link :to="`/portfolio-details/${portfolio_data[2].id}`">
-                              <img :src="portfolio_data[2].img" :alt="portfolio_data[2].title" class="gallery-img-small">
-                           </nuxt-link>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Colonne droite : AgencEco (grande image centrée) -->
-                  <div class="col-6 d-flex align-items-center">
-                     <div class="tp-offcanvas-gallery-img fix w-100">
-                        <nuxt-link :to="`/portfolio-details/${portfolio_data[1].id}`">
-                           <img :src="portfolio_data[1].img" :alt="portfolio_data[1].title" class="gallery-img-large">
-                        </nuxt-link>
-                     </div>
-                  </div>
-               </div>
             </div>
             <div class="tp-offcanvas-contact-2">
                <h3 class="tp-offcanvas-contact-title-2">Contact</h3>
@@ -99,8 +70,6 @@
 </template>
 
 <script setup lang="ts">
-import portfolio_data from '@/data/portfolio-data';
-
 withDefaults(defineProps<{isOffCanvasOpen:boolean;}>(),{});
 const emit = defineEmits();
 

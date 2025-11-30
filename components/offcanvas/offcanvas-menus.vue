@@ -28,7 +28,7 @@
         </ul>
       </li>
       <li v-else :class="`${isActive ? '' : 'active'}`" @mouseover="isActive = true" @mouseleave="isActive = false">
-        <nuxt-link :href="item.link">{{ item.title }}</nuxt-link>
+        <nuxt-link :href="item.link" @click="handleLinkClick">{{ item.title }}</nuxt-link>
       </li>
     </template>
   </ul>
@@ -38,6 +38,8 @@
 <script setup lang="ts">
 import menu_data from '@/data/menu-data';
 
+const emit = defineEmits(['close-menu']);
+
 const isActive = ref<boolean>(false);
 const navTitle = ref('');
 
@@ -45,4 +47,7 @@ const toggleMobileMenu = (menu: string) => {
   navTitle.value = navTitle.value === menu ? '' : menu;
 };
 
+const handleLinkClick = () => {
+  emit('close-menu');
+};
 </script>

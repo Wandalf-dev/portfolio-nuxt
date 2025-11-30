@@ -12,6 +12,14 @@ const count = ref(props.min);
 const counterRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
+  const isMobile = window.innerWidth < 992;
+
+  // Sur mobile, afficher directement le nombre final sans animation
+  if (isMobile) {
+    count.value = props.max;
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

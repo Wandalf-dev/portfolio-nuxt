@@ -19,7 +19,7 @@
         <div class="tp-hero-shape-1 background-dark-mode" style="background-image:url(/images/hero/hero-overlay-2.png)"></div>
         <span class="tp-hero-shape-2"></span>
       </div>
-      <div class="tp-hero-bottom-text-wrapper">
+      <div class="tp-hero-bottom-text-wrapper d-none d-lg-flex">
         <div class="tp-hero-bottom-text">
             <p>Développeur Full-Stack</p>
             <p>Développeur Full-Stack</p>

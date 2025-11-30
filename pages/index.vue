@@ -37,13 +37,23 @@ import {animatedHeadline} from '@/utils/animatedHeadline';
 import {buttonAnimation} from '@/utils/buttonAnimation';
 
 onMounted(() => {
-  useSmoothScroll();
-  
+  const isMobile = window.innerWidth < 992;
+
+  // Smooth scroll uniquement sur desktop
+  if (!isMobile) {
+    useSmoothScroll();
+  }
+
   setTimeout(() => {
+    // Animation du titre (Full-Stack, Backend, Frontend) sur tous les écrans
     animatedHeadline();
-    useAnimationTitle();
-    buttonAnimation();
-    useScrollTextAnimation();
-  },0)
+
+    // Autres animations uniquement sur desktop
+    if (!isMobile) {
+      useAnimationTitle();
+      buttonAnimation();
+      useScrollTextAnimation();
+    }
+  }, 0)
 })
 </script>
