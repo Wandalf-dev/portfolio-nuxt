@@ -6,25 +6,20 @@
             <span class="tp-services-inner-border tp-vertical-line transition-3"></span>
             <span class="tp-services-inner-border right tp-vertical-line transition-3"></span>
 
-                        <div class="row gx-0">
-              <div class="col-xl-6 col-lg-7">
-                  <div class="tp-services-wrapper tp-services-capsule-wrapper p-relative  pt-100 pr-70"
-                    data-tp-throwable-scene="true">
-                    <div class="tp-section-title-wrapper tp_text_anim mb-170">
+            <div class="row gx-0">
+              <div class="col-12">
+                  <div class="tp-services-wrapper p-relative pt-100 pr-70">
+                    <div class="tp-section-title-wrapper tp_text_anim mb-50">
                         <div class="tp-section-title-inner p-relative">
-                          <span class="tp-section-subtitle">Prestations</span>
+                          <span class="tp-section-subtitle">Services</span>
                           <h3 class="tp-section-title tp_title_anim">Ce que <br> je propose.</h3>
                         </div>
                         <p>Des solutions web sur-mesure, de la conception à la mise en production.</p>
                     </div>
-                    <!-- service capsule items -->
-                    <service-capsule-items />
-                    <!-- service capsule items -->
                   </div>
               </div>
-              <div class="col-xl-6 col-lg-5">
-                  <div class="tp-services-accordion tp-accordion tp-accordion-2 mt-90 pl-70 p-relative">
-                    <span class="tp-services-accordion-border"></span>
+              <div class="col-12">
+                  <div class="tp-services-accordion tp-accordion tp-accordion-2 pl-70 p-relative">
                     <div class="accordion" id="accordionExample">
                         <div v-for="(item) in accordion_data" :key="item.id" :class="`accordion-item tp-services-accordion-item ${item.active ? 'active' :''}`">
                           <h2 class="accordion-header" :id="`heading-${item.tab_id}`">
@@ -54,8 +49,6 @@
 </template>
 
 <script setup lang="ts">
-import throwableAnimation from '@/utils/throwableAnim';
-
 const accordion_data = [
     {
       id: 1,
@@ -103,9 +96,4 @@ const accordion_data = [
       ]
     }
   ];
-
-
-  onMounted(() => {
-    throwableAnimation();
-  })
 </script>
