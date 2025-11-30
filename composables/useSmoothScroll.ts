@@ -1,7 +1,9 @@
 import { gsap } from "gsap";
 
 export default function useSmoothScroll() {
-  const isSmoothScroll = ref<boolean>(true);
+  // Désactiver smooth scroll sur mobile (< 992px)
+  const isMobile = window.innerWidth < 992;
+  const isSmoothScroll = ref<boolean>(!isMobile);
 
   const { $ScrollSmoother, $ScrollTrigger } = useNuxtApp();
   gsap.registerPlugin($ScrollTrigger as any, $ScrollSmoother as any);
@@ -15,8 +17,5 @@ export default function useSmoothScroll() {
       normalizeScroll: false,
       ignoreMobileResize: true,
     });
-  }
-  else {
-    console.log('Smooth scroll is disabled');
   }
 }
