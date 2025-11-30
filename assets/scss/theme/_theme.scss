@@ -140,6 +140,21 @@ html{
 		overscroll-behavior: none;
 		overscroll-behavior-y: none;
 	}
+
+	// Désactiver les transitions lourdes sur mobile pour de meilleures performances
+	.fade {
+		transition: none !important;
+	}
+
+	.tab-pane.fade {
+		opacity: 1 !important;
+		transition: none !important;
+	}
+
+	.transition-3,
+	.tp-transition {
+		transition: none !important;
+	}
 }
 
 /*---------------------------------

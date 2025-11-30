@@ -108,6 +108,10 @@
             height: 32px;
             @extend %transition;
             z-index: -1;
+            // Désactiver les transitions sur mobile
+            @media #{$md}, #{$sm}, #{$xs}{
+                transition: none !important;
+            }
         }
         & .nav-tabs{
             border: 1px solid rgba($color: $white, $alpha: .2);
@@ -125,5 +129,17 @@
             }
         }
 
+    }
+
+    // Désactiver les animations de fade sur mobile pour les tabs
+    &-tab-content{
+        @media #{$md}, #{$sm}, #{$xs}{
+            & .tab-pane{
+                &.fade{
+                    transition: none !important;
+                    opacity: 1 !important;
+                }
+            }
+        }
     }
 }

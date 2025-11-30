@@ -43,15 +43,27 @@ const brands = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg',
 ];
 
-const slider_setting = {
-  modules: [Autoplay],
+const isMobile = ref(false);
+
+onMounted(() => {
+  isMobile.value = window.innerWidth < 992;
+});
+
+const slider_setting = computed(() => ({
+  modules: isMobile.value ? [] : [Autoplay],
   slidesPerView: 5,
   spaceBetween: 64,
-  loop: true,
-  autoplay: {
+  loop: !isMobile.value,
+  autoplay: isMobile.value ? false : {
     delay: 2000,
     disableOnInteraction: false,
   },
+  // Désactiver les effets sur mobile pour de meilleures performances
+  speed: isMobile.value ? 200 : 300,
+  cssMode: isMobile.value,
+  touchRatio: isMobile.value ? 1 : 1,
+  resistance: isMobile.value,
+  resistanceRatio: 0.85,
   navigation: {
     nextEl: ".tp-brand-slider-button-next",
     prevEl: ".tp-brand-slider-button-prev",
@@ -86,7 +98,7 @@ const slider_setting = {
       spaceBetween: 15,
     },
   },
-};
+}));
 </script>
 
 <style scoped>
