@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader />
     <back-to-top/>
     <header-one />
     <div
