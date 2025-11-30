@@ -1,12 +1,23 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
-
+// Throttle helper pour limiter les appels sur mobile
+const throttle = (func: Function, limit: number) => {
+  let inThrottle = false;
+  return function(this: any, ...args: any[]) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+};
 
 const useSticky = () => {
   const sticky = ref<boolean>(false);
   const isStickyVisible = ref<boolean>(false);
 
   let lastScrollTop = 0;
+  let scrollHandler: EventListener | null = null;
 
   const handleScroll = (): void => {
     const headerElement = document.getElementById('sticky-header');
@@ -37,11 +48,18 @@ const useSticky = () => {
   };
 
   onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
+    const isMobile = window.innerWidth < 992;
+    // Throttle à 100ms sur mobile pour réduire les lags
+    scrollHandler = isMobile
+      ? throttle(handleScroll, 100) as EventListener
+      : handleScroll;
+    window.addEventListener('scroll', scrollHandler, { passive: true });
   });
 
   onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
+    }
   });
 
   return {

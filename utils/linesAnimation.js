@@ -2,6 +2,9 @@
 import { gsap } from 'gsap';
 
 export const linesAnimation = () => {
+  // Désactiver sur mobile
+  if (window.innerWidth < 992) return;
+
  //home 1 line styles start
 
 	// for brand

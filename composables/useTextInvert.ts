@@ -2,6 +2,9 @@ import { gsap } from "gsap";
 import imagesLoaded from "imagesloaded";
 
 export default function useTextInvert(cls:string) {
+  // Désactiver sur mobile
+  if (typeof window === "undefined" || window.innerWidth < 992) return;
+
   const { $SplitText } = useNuxtApp();
   gsap.registerPlugin($SplitText as any);
   const SplitText: any = $SplitText;

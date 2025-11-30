@@ -10,16 +10,35 @@
 </template>
 
 <script setup lang="ts">
+// Throttle helper pour limiter les appels sur mobile
+const throttle = (func: Function, limit: number) => {
+  let inThrottle = false;
+  return function(this: any, ...args: any[]) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+};
+
 onMounted(() => {
   const result = document.querySelector(".back-to-top-wrapper");
   if (result) {
-    document.addEventListener("scroll", () => {
+    const isMobile = window.innerWidth < 992;
+
+    const handleScroll = () => {
       if (window.scrollY > 200) {
         result.classList.add("back-to-top-btn-show");
       } else {
         result.classList.remove("back-to-top-btn-show");
       }
-    });
+    };
+
+    // Throttle à 150ms sur mobile pour réduire les lags
+    const scrollHandler = isMobile ? throttle(handleScroll, 150) : handleScroll;
+    document.addEventListener("scroll", scrollHandler, { passive: true });
+
     result.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });

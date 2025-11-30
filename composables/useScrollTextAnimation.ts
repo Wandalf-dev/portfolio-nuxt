@@ -1,6 +1,9 @@
 import {gsap} from "gsap";
 
 export default function useScrollTextAnimation() {
+  // Désactiver sur mobile
+  if (typeof window === "undefined" || window.innerWidth < 992) return;
+
   if (typeof window !== "undefined") {
     /* services animation start */
     gsap.set('.tp-services-bg-text', {

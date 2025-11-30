@@ -1,6 +1,9 @@
 import {gsap} from "gsap";
 
 export function useCharAnimation() {
+  // Désactiver sur mobile
+  if (window.innerWidth < 992) return;
+
   const { $SplitText } = useNuxtApp();
   gsap.registerPlugin($SplitText as any);
   const SplitText: any = $SplitText;
