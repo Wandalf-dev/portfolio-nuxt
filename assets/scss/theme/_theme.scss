@@ -113,12 +113,13 @@
 
 html{
 	scroll-behavior: smooth;
+	overscroll-behavior: none;
 }
 
 
 
 /*---------------------------------
-	typography css start 
+	typography css start
 ---------------------------------*/
 body {
 	font-family: var(--tp-ff-body);
@@ -126,6 +127,7 @@ body {
 	font-weight: normal;
 	color: var(--tp-text-body);
 	line-height: 26px;
+	overscroll-behavior: none;
 }
 
 #main-scrollbar {
