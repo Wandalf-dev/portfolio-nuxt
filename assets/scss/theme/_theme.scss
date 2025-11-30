@@ -118,29 +118,9 @@ html{
 }
 
 /*---------------------------------
-	iOS Safari bounce fix
+	Optimisations mobile
 ---------------------------------*/
 @media (max-width: 991px) {
-	html, body {
-		position: fixed;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-	}
-
-	#__nuxt {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		overflow-y: auto;
-		overflow-x: hidden;
-		-webkit-overflow-scrolling: touch;
-		overscroll-behavior: none;
-		overscroll-behavior-y: none;
-	}
-
 	// Désactiver les transitions lourdes sur mobile pour de meilleures performances
 	.fade {
 		transition: none !important;

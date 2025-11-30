@@ -11,7 +11,8 @@
                   <h3 class="tp-brand-title">Technologies <br> que j'utilise</h3>
               </div>
               <div class="col-xl-9 col-lg-9 col-md-7">
-                  <div class="tp-brand-slider">
+                  <!-- Desktop: Swiper -->
+                  <div v-if="!isMobile" class="tp-brand-slider">
                     <div class="tp-brand-slider-active swiper-container fix">
                         <swiper v-bind="slider_setting" class="swiper-wrapper align-items-center">
                           <swiper-slide v-for="(b,i) in brands" :key="i" class="tp-brand-item">
@@ -20,6 +21,15 @@
                               </a>
                           </swiper-slide>
                         </swiper>
+                    </div>
+                  </div>
+
+                  <!-- Mobile: Grille CSS statique -->
+                  <div v-else class="tp-brand-grid">
+                    <div v-for="(b,i) in brands" :key="i" class="tp-brand-grid-item">
+                      <a href="#" class="brand-icon-wrapper">
+                        <img :src="b" alt="brand" class="brand-icon">
+                      </a>
                     </div>
                   </div>
               </div>
@@ -47,23 +57,31 @@ const isMobile = ref(false);
 
 onMounted(() => {
   isMobile.value = window.innerWidth < 992;
+
+  // Réagir aux changements de taille d'écran
+  const handleResize = () => {
+    isMobile.value = window.innerWidth < 992;
+  };
+
+  window.addEventListener('resize', handleResize);
+
+  // Cleanup
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+  });
 });
 
-const slider_setting = computed(() => ({
-  modules: isMobile.value ? [] : [Autoplay],
+// Configuration Swiper uniquement pour desktop
+const slider_setting = {
+  modules: [Autoplay],
   slidesPerView: 5,
   spaceBetween: 64,
-  loop: !isMobile.value,
-  autoplay: isMobile.value ? false : {
+  loop: true,
+  autoplay: {
     delay: 2000,
     disableOnInteraction: false,
   },
-  // Désactiver les effets sur mobile pour de meilleures performances
-  speed: isMobile.value ? 200 : 300,
-  cssMode: isMobile.value,
-  touchRatio: isMobile.value ? 1 : 1,
-  resistance: isMobile.value,
-  resistanceRatio: 0.85,
+  speed: 300,
   navigation: {
     nextEl: ".tp-brand-slider-button-next",
     prevEl: ".tp-brand-slider-button-prev",
@@ -85,24 +103,33 @@ const slider_setting = computed(() => ({
       slidesPerView: 4,
       spaceBetween: 40,
     },
-    '768': {
-      slidesPerView: 3,
-      spaceBetween: 30,
-    },
-    '576': {
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    '0': {
-      slidesPerView: 3,
-      spaceBetween: 15,
-    },
   },
-}));
+};
 </script>
 
 <style scoped>
+/* Swiper desktop */
 .tp-brand-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Grille mobile statique */
+.tp-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 10px 0;
+}
+
+@media (max-width: 576px) {
+  .tp-brand-grid {
+    gap: 15px;
+  }
+}
+
+.tp-brand-grid-item {
   display: flex;
   justify-content: center;
   align-items: center;
